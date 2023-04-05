@@ -18,9 +18,8 @@ class m230405_181614_create_feedback_table extends Migration
             'email' => $this->string(255)->notNull(),
             'phone' => $this->string(15)->notNull(),
             'message' => $this->text()->notNull(),
-            'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->defaultValue(null)->append('ON UPDATE CURRENT_TIMESTAMP')
-        ]);
+            'created_at' => $this->integer(11)
+        ], 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB');
     }
 
     /**

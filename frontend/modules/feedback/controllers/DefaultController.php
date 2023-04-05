@@ -2,10 +2,8 @@
 
 namespace app\modules\feedback\controllers;
 
-use app\modules\feedback\models\Feedback;
 use app\modules\feedback\models\FeedbackSearch;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 /**
@@ -19,12 +17,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-       /* $dataProvider = new ActiveDataProvider([
-            'query' => Feedback::find(),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);*/
         $searchModel = new FeedbackSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -33,4 +25,5 @@ class DefaultController extends Controller
             'searchModel' => $searchModel,
         ]);
     }
+
 }

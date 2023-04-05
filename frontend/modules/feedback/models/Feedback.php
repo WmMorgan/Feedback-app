@@ -3,7 +3,6 @@
 namespace app\modules\feedback\models;
 
 use Yii;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "feedback".
@@ -51,10 +50,18 @@ class Feedback extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-//        $this->created_at = new Expression('NOW()');
+        $this->created_at = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i'));
         return parent::beforeSave($insert);
     }
 
+
+    public function afterFind()
+
+    {
+        $this->created_at = date('Y-m-d / h:i', $this->created_at);
+        parent::afterFind();
+
+    }
 
     /**
      * {@inheritdoc}
