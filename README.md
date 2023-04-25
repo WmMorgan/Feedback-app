@@ -13,6 +13,10 @@ DIRECTORY STRUCTURE
 
 
     frontend/modules/feedback              location of works done
-
+        - admin profile:
+            login: admin
+            password: admin
+         
+    guests controller: SendController
 
 ```

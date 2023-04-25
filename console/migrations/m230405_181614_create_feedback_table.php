@@ -18,7 +18,9 @@ class m230405_181614_create_feedback_table extends Migration
             'email' => $this->string(255)->notNull(),
             'phone' => $this->string(15)->notNull(),
             'message' => $this->text()->notNull(),
-            'created_at' => $this->integer(11)
+            'status' => $this->integer()->notNull(),
+            'created_at' => $this->integer(11),
+            'updated_at' => $this->integer(11)
         ], 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB');
     }
 

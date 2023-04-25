@@ -2,7 +2,10 @@
 
 namespace app\modules\feedback\models;
 
+use app\modules\feedback\components\ModerationBehavior;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "feedback".
@@ -35,6 +38,8 @@ class Feedback extends \yii\db\ActiveRecord
         return [
             [['name', 'email', 'phone', 'message'], 'required'],
             [['message'], 'string'],
+            [['status'], 'integer'],
+            [['status'], 'default', 'value' => ModerationBehavior::PROCCESS],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'email'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 15],
@@ -48,20 +53,20 @@ class Feedback extends \yii\db\ActiveRecord
         ];
     }
 
-    public function beforeSave($insert)
+
+    public function behaviors()
     {
-        $this->created_at = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i'));
-        return parent::beforeSave($insert);
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => ModerationBehavior::class
+            ]
+        ];
     }
 
-
-    public function afterFind()
-
-    {
-        $this->created_at = date('Y-m-d / h:i', $this->created_at);
-        parent::afterFind();
-
-    }
 
     /**
      * {@inheritdoc}

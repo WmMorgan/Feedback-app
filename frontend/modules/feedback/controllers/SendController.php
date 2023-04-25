@@ -5,7 +5,9 @@ namespace app\modules\feedback\controllers;
 
 
 use app\modules\feedback\models\Feedback;
+use app\modules\feedback\models\FeedbackSearch;
 use Yii;
+use yii\db\Expression;
 use yii\web\Controller;
 
 /**
@@ -14,6 +16,7 @@ use yii\web\Controller;
  */
 class SendController extends Controller
 {
+    public $layout = '@app/views/layouts/guest';
 
     public function actionIndex()
     {
@@ -41,6 +44,20 @@ class SendController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    /**
+     * @return string
+     * Для всех видно будет
+     */
+    public function actionAll() {
+        $searchModel = new FeedbackSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get(), true);
+
+        return $this->render('all', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+        ]);
     }
 
 }

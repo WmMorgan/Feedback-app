@@ -7,35 +7,26 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Sign In';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+<div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v">
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+    <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
+        <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> bracket <span class="tx-normal">]</span></div>
+        <div class="tx-center mg-b-60">The Admin Template For Perfectionist</div>
+        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+        <div class="form-group">
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+        </div><!-- form-group -->
+        <div class="form-group">
+            <?= $form->field($model, 'password')->passwordInput() ?>
+            <?= Html::a('Forgot password?', ['site/request-password-reset'], ['class' => 'tx-info tx-12 d-block mg-t-10']) ?>
+        </div><!-- form-group -->
+        <?= Html::submitButton('Sign In', ['class' => 'btn btn-info btn-block', 'name' => 'login-button']) ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="my-1 mx-0" style="color:#999;">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-                    <br>
-                    Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
-                </div>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
-        </div>
-    </div>
-</div>
+        <?php ActiveForm::end(); ?>
+        <div class="mg-t-60 tx-center">Not yet a member? <?= Html::a('Sign Up', ['site/signup'], ['class' => 'tx-info']) ?></div>
+    </div><!-- login-wrapper -->
+</div><!-- d-flex -->

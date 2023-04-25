@@ -46,7 +46,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['post'],
+//                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -66,6 +66,15 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function beforeAction($action)
+    {
+        if (Yii::$app->user->isGuest) {
+
+            $this->layout = 'guest';
+        }
+        return parent::beforeAction($action);
     }
 
     /**

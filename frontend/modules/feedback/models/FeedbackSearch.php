@@ -2,6 +2,7 @@
 
 namespace app\modules\feedback\models;
 
+use app\modules\feedback\components\ModerationBehavior;
 use app\modules\feedback\models\Feedback;
 use Yii;
 use yii\base\Model;
@@ -23,9 +24,14 @@ class FeedbackSearch extends Feedback
         return Model::scenarios();
     }
 
-    public function search($params)
+    /**
+     * @param $params
+     * @param false $ifstatus
+     * @return ActiveDataProvider
+     */
+    public function search($params, $ifstatus = false)
     {
-        $query = Feedback::find();
+        $query = $ifstatus ? Feedback::find()->where(['status' => ModerationBehavior::APPROVED]) : Feedback::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

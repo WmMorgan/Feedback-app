@@ -30,7 +30,7 @@ services:
       - MYSQL_USER=yii2advanced
       - MYSQL_PASSWORD=secret
   phpmyadmin:
-    container_name: pma_feedback
+    container_name: pma_ums
     image: phpmyadmin/phpmyadmin
     ports:
       - 8081:80
